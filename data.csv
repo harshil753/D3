@@ -1,0 +1,56 @@
+﻿id,state,abbr,bachelors,exercise
+1,Alabama,AL,23.5,72.4
+2,Alaska,AK,28,80.8
+3,Arizona,AZ,27.6,78.8
+4,Arkansas,AR,21.4,69.4
+5,California,CA,31.7,78.3
+6,Colorado,CO,38.3,83.6
+7,Connecticut,CT,38,79.4
+8,Delaware,DE,30.6,75.1
+9,District of Columbia,DC,55,79.2
+10,Florida,FL,27.3,76.3
+11,Georgia,GA,29.1,76.4
+12,Hawaii,HI,31,80.4
+13,Idaho,ID,25,81.3
+14,Illinois,IL,32.8,76.1
+15,Indiana,IN,24.7,73.9
+16,Iowa,IA,27.7,77.4
+17,Kansas,KS,31.5,76.2
+18,Kentucky,KY,22.2,71.8
+19,Louisiana,LA,22.9,70.5
+20,Maine,ME,29.4,80.3
+21,Maryland,MD,38.2,78.6
+22,Massachusetts,MA,41.2,79.9
+23,Michigan,MI,27.4,74.5
+24,Minnesota,MN,34.3,79.8
+25,Mississippi,MS,21.1,68.4
+26,Missouri,MO,27.5,75
+27,Montana,MT,29.3,80.4
+28,Nebraska,NE,29.5,78.7
+29,Nevada,NV,23.1,77.5
+30,New Hampshire,NH,35,80.7
+31,New Jersey,NJ,37.4,76.7
+32,New Mexico,NM,26.4,76.7
+33,New York,NY,34.5,74.1
+34,North Carolina,NC,28.7,76.8
+35,North Dakota,ND,27.4,78.7
+36,Ohio,OH,26.6,75.1
+37,Oklahoma,OK,24.2,71.7
+38,Oregon,OR,30.8,83.5
+39,Pennsylvania,PA,29,76.7
+40,Rhode Island,RI,30.4,77.5
+41,South Carolina,SC,26.3,74.7
+42,South Dakota,SD,27.8,78.8
+43,Tennessee,TN,25.3,73.2
+44,Texas,TX,27.8,72.4
+45,Utah,UT,31.1,83.2
+46,Vermont,VT,34.9,81
+47,Virginia,VA,36.7,76.5
+48,Washington,WA,33.1,81.9
+49,West Virginia,WV,19.2,71.3
+50,Wisconsin,WI,28.4,78.8
+51,Wyoming,WY,26.6,77.9
+52,Puerto Rico,PR,24.4,72.3
+,,,,59.4
+,,,,77.4
+,,,,76.8

@@ -77,7 +77,7 @@ d3.csv("data.csv", function(error, healthData) {
         return yLinearScale(data.exercise);
       })
       .attr("r", "15")
-      .attr("fill", "grey")
+      .attr("fill", "lightblue")
       .style("opacity", .75)
       .attr("stroke", "black")
       .on("mouseover", function(data) {

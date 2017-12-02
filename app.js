@@ -35,7 +35,7 @@ d3.csv("data.csv", function(error, healthData) {
 
     healthData.forEach(function(data) {
         data.bachelors =+ data.bachelors;
-        data.exercise =+ data.exercise;
+        data.fiftyPlus =+ data.fiftyPlus;
     });
 
       // Create scale functions
@@ -50,18 +50,18 @@ d3.csv("data.csv", function(error, healthData) {
     var leftAxis = d3.axisLeft(yLinearScale);
 
       // Scale the domain
-    xLinearScale.domain([0, 100]);
+    xLinearScale.domain([10, 60]);
 
-    yLinearScale.domain([0, 100]);
+    yLinearScale.domain([60, 90]);
     
     var toolTip = d3.tip()
         .attr("class", "tooltip")
         .offset([80, -60])
         .html(function(data) {
         var state = data.state;
-        var exercise = +data.exercise;
+        var fiftyPlus = +data.fiftyPlus;
         var bachelors = +data.bachelors;
-        return (state + "<br> Regularly Exercise %: " + exercise + "<br> Have Bachelors%: " + bachelors);
+        return ("<b>"+state +"</b><br>" + "<br> Annual Household Income $50,000+: " + fiftyPlus + "%<br> Have Bachelors: " + bachelors+"%");
         });
     
     chart.call(toolTip);
@@ -74,18 +74,24 @@ d3.csv("data.csv", function(error, healthData) {
         return xLinearScale(data.bachelors);
       })
       .attr("cy", function(data, index) {
-        return yLinearScale(data.exercise);
+        return yLinearScale(data.fiftyPlus);
       })
       .attr("r", "15")
       .attr("fill", "lightblue")
       .style("opacity", .75)
       .attr("stroke", "black")
+      .attr("class","text")
+      .text(function(data){
+        return data.attr;
+      })
       .on("mouseover", function(data) {
         toolTip.show(data);
+        toolTip.style("display", null);
       })
       // onmouseout event
       .on("mouseout", function(data, index) {
         toolTip.hide(data);
+        toolTip.style("display", "none");
       });
     
     chart.append("g")
@@ -101,7 +107,7 @@ d3.csv("data.csv", function(error, healthData) {
         .attr("x", 0 - (height / 2))
         .attr("dy", "1em")
         .attr("class", "axisText")
-        .text("% of People Who Exercise Regularly");
+        .text("Household Annual Income $50,000+");
 
     // Append x-axis labels
     chart.append("text")

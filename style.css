@@ -7,7 +7,7 @@
   font: 12px sans-serif;
   color: white;
   text-align: center;
-  background: #551aaf;
+  background: wheat;
   border: 0;
   border-radius: 10px;
 }
@@ -15,6 +15,6 @@
 .axisText {
   font-family: sans-serif;
   font-weight: bold;
-  fill: #551aaf;
+  fill: black;
   text-anchor: middle;
 }

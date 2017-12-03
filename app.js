@@ -23,12 +23,6 @@ d3.select(".chart")
   .attr("class", "tooltip")
   .style("opacity", 0);
 
-// Configure a band scale, with a range between 0 and the chartWidth and a padding of 0.1 (10%)
-var xBandScale = d3.scaleBand().range([0, width]).padding(0.1);
-
-// Create a linear scale, with a range between the chartHeight and 0.
-var yLinearScale = d3.scaleLinear().range([height, 0]);
-
 // import data.csv 
 d3.csv("data.csv", function(error, healthData) {
   if (error) throw error;
@@ -50,9 +44,17 @@ d3.csv("data.csv", function(error, healthData) {
   var leftAxis = d3.axisLeft(yLinearScale);
 
     // Scale the domain
-  xLinearScale.domain([10, 60]);
+  xLinearScale.domain(
+    [d3.min(healthData, function(data){
+      return data.bachelors}, 
+    d3.max(healthData, function(data){
+      return data.bachelors}))]);
 
-  yLinearScale.domain([60, 90]);
+  yLinearScale.domain(
+    [d3.min(healthData, function(data){
+      return data.fiftyPlus}, 
+    d3.max(healthData, function(data){
+      return data.fiftyPlus}))]);
   
   var toolTip = d3.tip()
       .attr("class", "tooltip")

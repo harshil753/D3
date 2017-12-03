@@ -12,7 +12,7 @@ var svg = d3.select(".chart")
   .attr("width", svgWidth)
   .attr("height", svgHeight)
   .append("g")
-  .append("text")
+  // .append("text")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var chart = svg.append("g");
@@ -30,6 +30,7 @@ d3.csv("data.csv", function(error, healthData) {
   healthData.forEach(function(data) {
       data.bachelors =+ data.bachelors;
       data.fiftyPlus =+ data.fiftyPlus;
+      data.abbr =+ data.abbr
   });
 
     // Create scale functions
@@ -44,17 +45,11 @@ d3.csv("data.csv", function(error, healthData) {
   var leftAxis = d3.axisLeft(yLinearScale);
 
     // Scale the domain
-  xLinearScale.domain(
-    [d3.min(healthData, function(data){
-      return data.bachelors}, 
-    d3.max(healthData, function(data){
-      return data.bachelors}))]);
+  xLinearScale.domain([10, d3.max(healthData, function(data){
+      return +data.bachelors})]);
 
-  yLinearScale.domain(
-    [d3.min(healthData, function(data){
-      return data.fiftyPlus}, 
-    d3.max(healthData, function(data){
-      return data.fiftyPlus}))]);
+  yLinearScale.domain([10, d3.max(healthData, function(data){
+      return +data.fiftyPlus})]);
   
   var toolTip = d3.tip()
       .attr("class", "tooltip")
@@ -63,60 +58,60 @@ d3.csv("data.csv", function(error, healthData) {
       var state = data.state;
       var fiftyPlus = +data.fiftyPlus;
       var bachelors = +data.bachelors;
-      return ("<b>"+state +"</b><br>" + "<br> Annual Household Income $50,000+: " + fiftyPlus + "%<br> Have Bachelors: " + bachelors+"%");
+      return ("<h5>"+state +"</h5>" + "<br> Annual Household Income $50,000+: " + fiftyPlus + "%<br> Have Bachelors: " + bachelors+"%");
       });
   
   chart.call(toolTip);
 
   chart.selectAll("circle")
-  .data(healthData)
-  .enter().append("circle")
-    .attr("cx", function(data, index) {
-      return xLinearScale(data.bachelors);
-    })
-    .attr("cy", function(data, index) {
-      return yLinearScale(data.fiftyPlus);
-    })
-    .attr("r", "15")
-    .attr("fill", "lightblue")
-    .style("opacity", .75)
-    .attr("stroke", "black")
-    .on("mouseover", function(data) {
-      toolTip.show(data);
-      toolTip.style("display", null);
-    })
-    // onmouseout event
-    .on("mouseout", function(data, index) {
-      toolTip.hide(data);
-      toolTip.style("display", "none");
-    });
+    .data(healthData)
+    .enter().append("circle")
+      .attr("cx", function(data, index) {
+        return xLinearScale(data.bachelors);
+      })
+      .attr("cy", function(data, index) {
+        return yLinearScale(data.fiftyPlus);
+      })
+      .attr("r", "15")
+      .attr("fill", "lightblue")
+      .style("opacity", .75)
+      .attr("stroke", "black")
+      .on("mouseover", function(data) {
+        toolTip.show(data);
+        toolTip.style("display", null);
+      })
+      // onmouseout event
+      .on("mouseout", function(data, index) {
+        toolTip.hide(data);
+        toolTip.style("display", "none");
+      });
 
-  chart.selectAll("text")
-  .data(healthData)
-  .enter().append("text")
-  .text(function(data, index){
-    return data.abbr;
-    console.log(data.abbr);
-  });
+  // chart.selectAll("text")
+  // .data(healthData)
+  // .enter().append("text")
+  // .text(function(data, index){
+  //   return data.abbr;
+  //   console.log(data.abbr);
+  // });
   
   chart.append("g")
-  .attr("transform", `translate(0, ${height})`)
-  .call(bottomAxis);
+    .attr("transform", `translate(0, ${height})`)
+    .call(bottomAxis);
 
-  chart.append("g")
-      .call(leftAxis);
+    chart.append("g")
+        .call(leftAxis);
 
-  chart.append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 0 - margin.left + 40)
-      .attr("x", 0 - (height / 2))
-      .attr("dy", "1em")
-      .attr("class", "axisText")
-      .text("Household Annual Income $50,000+");
+    chart.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left + 40)
+        .attr("x", 0 - (height / 2))
+        .attr("dy", "1em")
+        .attr("class", "axisText")
+        .text("Household Annual Income $50,000+");
 
-  // Append x-axis labels
-  chart.append("text")
-      .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + 30) + ")")
-      .attr("class", "axisText")
-      .text("% of People Who Have Atleast a Bachelor's Degree");
-});
+    // Append x-axis labels
+    chart.append("text")
+        .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + 30) + ")")
+        .attr("class", "axisText")
+        .text("% of People Who Have Atleast a Bachelor's Degree");
+  });

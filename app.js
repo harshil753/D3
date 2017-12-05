@@ -58,7 +58,7 @@ d3.csv("data.csv", function(error, healthData) {
       var state = data.state;
       var fiftyPlus = +data.fiftyPlus;
       var bachelors = +data.bachelors;
-      return ("<h5>"+state +"</h5>" + "<br> Annual Household Income $50,000+: " + fiftyPlus + "%<br> Have Bachelors: " + bachelors+"%");
+      return ("<b>"+state +"</b>" + "<br> Annual Household Income $50,000+: " + fiftyPlus + "%<br> Have Bachelors: " + bachelors+"%");
       });
   
   chart.call(toolTip);
@@ -84,15 +84,13 @@ d3.csv("data.csv", function(error, healthData) {
       .on("mouseout", function(data, index) {
         toolTip.hide(data);
         toolTip.style("display", "none");
-      });
+      })
+      .append("text")
+      .text(function (data, index){
+        return data.abbr;
+        console.log (data.abbr);
+      })
 
-  // chart.selectAll("text")
-  // .data(healthData)
-  // .enter().append("text")
-  // .text(function(data, index){
-  //   return data.abbr;
-  //   console.log(data.abbr);
-  // });
   
   chart.append("g")
     .attr("transform", `translate(0, ${height})`)

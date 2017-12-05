@@ -48,7 +48,7 @@ d3.csv("data.csv", function(error, healthData) {
   xLinearScale.domain([10, d3.max(healthData, function(data){
       return +data.bachelors})]);
 
-  yLinearScale.domain([10, d3.max(healthData, function(data){
+  yLinearScale.domain([60, d3.max(healthData, function(data){
       return +data.fiftyPlus})]);
   
   // create the tool tip that will pop up when circle is moused over

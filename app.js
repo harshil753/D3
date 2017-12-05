@@ -44,13 +44,14 @@ d3.csv("data.csv", function(error, healthData) {
   var bottomAxis = d3.axisBottom(xLinearScale);
   var leftAxis = d3.axisLeft(yLinearScale);
 
-    // Scale the domain
+  // Scale the domain
   xLinearScale.domain([10, d3.max(healthData, function(data){
       return +data.bachelors})]);
 
   yLinearScale.domain([10, d3.max(healthData, function(data){
       return +data.fiftyPlus})]);
   
+  // create the tool tip that will pop up when circle is moused over
   var toolTip = d3.tip()
       .attr("class", "tooltip")
       .offset([80, -60])
@@ -62,7 +63,8 @@ d3.csv("data.csv", function(error, healthData) {
       });
   
   chart.call(toolTip);
-
+  
+  //create and append circles to graph
   chart.selectAll("circle")
     .data(healthData)
     .enter().append("circle")
@@ -91,25 +93,27 @@ d3.csv("data.csv", function(error, healthData) {
         console.log (data.abbr);
       })
 
-  
+  // call x axis
   chart.append("g")
-    .attr("transform", `translate(0, ${height})`)
-    .call(bottomAxis);
+  .attr("transform", `translate(0, ${height})`)
+  .call(bottomAxis);
 
-    chart.append("g")
-        .call(leftAxis);
+  //call y axis
+  chart.append("g")
+      .call(leftAxis);
+  
+  // Append y-axis labels
+  chart.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin.left + 40)
+      .attr("x", 0 - (height / 2))
+      .attr("dy", "1em")
+      .attr("class", "axisText")
+      .text("Household Annual Income $50,000+");
 
-    chart.append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 0 - margin.left + 40)
-        .attr("x", 0 - (height / 2))
-        .attr("dy", "1em")
-        .attr("class", "axisText")
-        .text("Household Annual Income $50,000+");
-
-    // Append x-axis labels
-    chart.append("text")
-        .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + 30) + ")")
-        .attr("class", "axisText")
-        .text("% of People Who Have Atleast a Bachelor's Degree");
-  });
+  // Append x-axis labels
+  chart.append("text")
+      .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + 30) + ")")
+      .attr("class", "axisText")
+      .text("% of People Who Have Atleast a Bachelor's Degree");
+});

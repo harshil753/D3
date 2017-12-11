@@ -87,13 +87,20 @@ d3.csv("data.csv", function(error, healthData) {
         toolTip.hide(data);
         toolTip.style("display", "none");
       })
-      .append("text")
-      .attr("dx", function(d){return -20})
-      .text(function (data, index){
-        return data.abbr;
-        console.log (data.abbr);
-      });
 
+  chart.selectAll("g")
+    .data(healthData)
+    .enter()
+    .append("text")
+    .attr("dx", function(data, index){
+      return xLinearScale(data.bachelors)-11.5
+    })
+    .attr("dy", function(data){
+      return yLinearScale(data.fiftyPlus)+4
+    })
+    .text(function (data, index){
+      return data.abbr;
+    });
   // call x axis
   chart.append("g")
   .attr("transform", `translate(0, ${height})`)

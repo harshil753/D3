@@ -12,7 +12,6 @@ var svg = d3.select(".chart")
   .attr("width", svgWidth)
   .attr("height", svgHeight)
   .append("g")
-  // .append("text")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var chart = svg.append("g");
@@ -30,7 +29,8 @@ d3.csv("data.csv", function(error, healthData) {
   healthData.forEach(function(data) {
       data.bachelors =+ data.bachelors;
       data.fiftyPlus =+ data.fiftyPlus;
-      data.abbr =+ data.abbr
+      data.abbr = data.abbr
+      data.state = data.state
   });
 
     // Create scale functions
@@ -88,10 +88,11 @@ d3.csv("data.csv", function(error, healthData) {
         toolTip.style("display", "none");
       })
       .append("text")
+      .attr("dx", function(d){return -20})
       .text(function (data, index){
         return data.abbr;
         console.log (data.abbr);
-      })
+      });
 
   // call x axis
   chart.append("g")

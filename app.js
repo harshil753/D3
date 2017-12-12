@@ -1,5 +1,5 @@
-var svgWidth = 960;
-var svgHeight = 500;
+var svgWidth = 1200;
+var svgHeight = 600;
 
 var margin = { top: 20, right: 40, bottom: 60, left: 100 };
 
@@ -45,11 +45,15 @@ d3.csv("data.csv", function(error, healthData) {
   var leftAxis = d3.axisLeft(yLinearScale);
 
   // Scale the domain
-  xLinearScale.domain([10, d3.max(healthData, function(data){
-      return +data.bachelors})]);
+  xLinearScale.domain([(d3.min(healthData, function(data) {
+    return +data.bachelors-1;
+  })), (d3.max(healthData, function(data){
+      return +data.bachelors+1}))]);
 
-  yLinearScale.domain([60, d3.max(healthData, function(data){
-      return +data.fiftyPlus})]);
+  yLinearScale.domain([(d3.min(healthData, function(data) {
+    return +data.fiftyPlus-1;
+  })), (d3.max(healthData, function(data){
+      return +data.fiftyPlus+1}))]);
   
   // create the tool tip that will pop up when circle is moused over
   var toolTip = d3.tip()
@@ -103,8 +107,8 @@ d3.csv("data.csv", function(error, healthData) {
     });
   // call x axis
   chart.append("g")
-  .attr("transform", `translate(0, ${height})`)
-  .call(bottomAxis);
+    .attr("transform", `translate(0, ${height})`)
+    .call(bottomAxis);
 
   //call y axis
   chart.append("g")
@@ -112,16 +116,22 @@ d3.csv("data.csv", function(error, healthData) {
   
   // Append y-axis labels
   chart.append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 0 - margin.left + 40)
-      .attr("x", 0 - (height / 2))
-      .attr("dy", "1em")
-      .attr("class", "axisText")
-      .text("Household Annual Income $50,000+");
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0 - margin.left + 40)
+    .attr("x", 0 - (height / 2))
+    .attr("dy", "1em")
+    .attr("class", "axisText")
+    .text("Household Annual Income $50,000+");
 
   // Append x-axis labels
   chart.append("text")
-      .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + 30) + ")")
-      .attr("class", "axisText")
-      .text("% of People Who Have Atleast a Bachelor's Degree");
+    .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + 30) + ")")
+    .attr("class", "axisText")
+    .text("% of People Who Have Atleast a Bachelor's Degree");
+  
+  chart.append("text")
+    .attr("transform","translate(" +(width/2)+"," + (0)+")")
+    .attr("class","axisText")
+    .text("Money and Knowledge")
+    
 });
